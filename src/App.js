@@ -22,7 +22,7 @@ function App() {
           href="https://discord.gg/slang"
           className="inline-block bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg shadow transition"
         >
-          Join Our Discord
+          Purchase Vendors
         </a>
       </main>
       <section className="bg-purple-900 py-20 px-6 text-gray-100">
