@@ -6,7 +6,7 @@ function App() {
     <div className="min-h-screen bg-black text-white font-sans">
       <header className="bg-purple-800 p-6 shadow-lg">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">Top Resells</h1>
+          <h1 className="text-2xl font-bold">Top Resellers</h1>
           <nav className="space-x-6">
             <a href="#" className="hover:text-purple-300">Home</a>
             <a href="https://discord.gg/slang" className="hover:text-purple-300">Join Discord</a>
@@ -14,7 +14,7 @@ function App() {
         </div>
       </header>
       <main className="text-center py-24 px-6">
-        <h2 className="text-4xl md:text-6xl font-extrabold mb-6 text-purple-400">Welcome to TopResells</h2>
+        <h2 className="text-4xl md:text-6xl font-extrabold mb-6 text-purple-400">Top Reselling</h2>
         <p className="text-lg max-w-2xl mx-auto mb-10 text-gray-300">
           Your #1 source for premium digital reselling tools and resources. Join the community and start your journey today.
         </p>
@@ -42,7 +42,7 @@ function App() {
         </div>
       </section>
       <footer className="bg-black text-center text-sm text-gray-500 py-6">
-        © 2025 TopResells. All rights reserved.
+        © 2025 ResellsTop. All rights reserved.
       </footer>
     </div>
   );
