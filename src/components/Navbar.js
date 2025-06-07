@@ -8,7 +8,6 @@ export default function Navbar() {
       <h1 className="text-2xl font-bold text-white">TopResells</h1>
       <div className="space-x-6">
         <Link to="/" className="hover:underline">Home</Link>
-        <Link to="/products" className="hover:underline">Products</Link>
       </div>
     </nav>
   );
