@@ -1,146 +1,155 @@
-
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import React, { useState } from 'react';
 
 const products = [
   {
     id: 1,
-    name: "Apple Vendors",
-    image: "https://via.placeholder.com/300x200?text=Sneakers",
-    price: "$7.00",
+    name: 'Sample Product',
+    price: 10,
+    image: '/images/product1.jpg',
   },
   {
     id: 2,
-    name: "Essentials Vendors",
-    image: "https://via.placeholder.com/300x200?text=Hoodie",
-    price: "$7.00",
-  },
-  {
-    id: 3,
-    name: "Designer Clothing Vendors",
-    image: "https://via.placeholder.com/300x200?text=Watch",
-    price: "$10.00",
-  },
-    {
-    id: 4,
-    name: "Shoe Vendors",
-    image: "https://i.imgur.com/vEaBa1e.jpeg",
-    price: "$5.00",
-  },
-    {
-    id: 5,
-    name: "Nike Vendors",
-    image: "https://via.placeholder.com/300x200?text=Watch",
-    price: "$5.00",
+    name: 'Another Product',
+    price: 20,
+    image: '/images/product2.jpg',
   },
 ];
 
-const Navbar = ({ cartCount }) => (
-  <nav className="bg-black text-white p-4 flex justify-between items-center shadow-md">
-    <h1 className="text-2xl font-bold text-purple-500">TopResells</h1>
-    <div className="space-x-4">
-      <Link to="/" className="hover:text-purple-400">Home</Link>
-      <Link to="/products" className="hover:text-purple-400">Products</Link>
-      <Link to="/cart" className="hover:text-purple-400">Cart ({cartCount})</Link>
-    </div>
-  </nav>
-);
-
-const Home = () => (
-  <div className="text-center text-white bg-black min-h-screen flex flex-col justify-center items-center">
-    <h1 className="text-5xl font-bold mb-4 text-purple-500">Welcome to TopResells</h1>
-    <p className="text-lg max-w-xl text-gray-300">
-      Discover and resell exclusive fashion drops, luxury collectibles, and trending items. Join the hustle.
-    </p>
-    <Link
-      to="/products"
-      className="mt-6 px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-semibold transition"
-    >
-      View Products
-    </Link>
-  </div>
-);
-
-const Products = ({ addToCart }) => (
-  <div className="bg-black min-h-screen text-white p-8">
-    <h2 className="text-3xl font-bold text-purple-500 mb-6 text-center">Our Products</h2>
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      {products.map((product) => (
-        <div
-          key={product.id}
-          className="bg-gray-900 rounded-xl shadow-md p-4 hover:shadow-purple-500 transition"
-        >
-          <img
-            src={product.image}
-            alt={product.name}
-            className="w-full h-40 object-cover rounded-md mb-4"
-          />
-          <h3 className="text-xl font-semibold text-purple-400">{product.name}</h3>
-          <p className="text-gray-300 mt-2">{product.price}</p>
-          <button
-            onClick={() => addToCart(product)}
-            className="mt-4 px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded text-white font-semibold"
-          >
-            Add to Cart
-          </button>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
-const Cart = ({ cart }) => (
-  <div className="bg-black min-h-screen text-white p-8">
-    <h2 className="text-3xl font-bold text-purple-500 mb-6 text-center">Your Cart</h2>
-    {cart.length === 0 ? (
-      <p className="text-center text-gray-400">Your cart is empty.</p>
-    ) : (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {cart.map((item, index) => (
-          <div
-            key={index}
-            className="bg-gray-900 rounded-xl shadow-md p-4 hover:shadow-purple-500 transition"
-          >
-            <img
-              src={item.image}
-              alt={item.name}
-              className="w-full h-40 object-cover rounded-md mb-4"
-            />
-            <h3 className="text-xl font-semibold text-purple-400">{item.name}</h3>
-            <p className="text-gray-300 mt-2">{item.price}</p>
-          </div>
-        ))}
-      </div>
-    )}
-  </div>
-);
-
-export default function App() {
+function App() {
   const [cart, setCart] = useState([]);
+  const [showCart, setShowCart] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
 
-  useEffect(() => {
-    const savedCart = JSON.parse(localStorage.getItem('cart')) || [];
-    setCart(savedCart);
-  }, []);
+  const addToCart = (product, qty) => {
+    const existing = cart.find(item => item.id === product.id);
+    if (existing) {
+      setCart(cart.map(item =>
+        item.id === product.id ? { ...item, quantity: item.quantity + qty } : item
+      ));
+    } else {
+      setCart([...cart, { ...product, quantity: qty }]);
+    }
+    setSelectedProduct(null);
+    setQuantity(1);
+  };
 
-  useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
-  }, [cart]);
+  const removeFromCart = (id) => {
+    setCart(cart.filter(item => item.id !== id));
+  };
 
-  const addToCart = (product) => {
-    setCart([...cart, product]);
+  const getTotal = () => {
+    return cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  };
+
+  const handleBuy = () => {
+    window.location.href = 'https://discord.gg/slang';
   };
 
   return (
-    <Router basename="/">
-      <div className="font-sans">
-        <Navbar cartCount={cart.length} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/products" element={<Products addToCart={addToCart} />} />
-          <Route path="/cart" element={<Cart cart={cart} />} />
-        </Routes>
-      </div>
-    </Router>
+    <div className="bg-black text-white min-h-screen font-sans">
+      <header className="p-6 flex justify-between items-center bg-purple-800 shadow-md">
+        <h1 className="text-3xl font-bold">TopResells</h1>
+        <button
+          onClick={() => setShowCart(!showCart)}
+          className="bg-white text-black px-4 py-2 rounded hover:bg-gray-200"
+        >
+          Cart ({cart.reduce((a, b) => a + b.quantity, 0)})
+        </button>
+      </header>
+
+      {/* Products */}
+      <main className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {products.map(product => (
+          <div
+            key={product.id}
+            className="bg-gray-900 rounded-lg overflow-hidden shadow-lg cursor-pointer hover:shadow-xl transition"
+            onClick={() => setSelectedProduct(product)}
+          >
+            <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
+            <div className="p-4">
+              <h2 className="text-xl font-bold">{product.name}</h2>
+              <p className="text-purple-400">${product.price}</p>
+            </div>
+          </div>
+        ))}
+      </main>
+
+      {/* Product Modal */}
+      {selectedProduct && (
+        <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+          <div className="bg-white text-black p-6 rounded-lg shadow-lg w-80">
+            <h3 className="text-xl font-bold mb-4">{selectedProduct.name}</h3>
+            <p className="mb-2">${selectedProduct.price}</p>
+            <input
+              type="number"
+              min="1"
+              value={quantity}
+              onChange={e => setQuantity(parseInt(e.target.value))}
+              className="w-full mb-4 px-3 py-2 border rounded"
+            />
+            <div className="flex justify-between">
+              <button
+                onClick={() => addToCart(selectedProduct, quantity)}
+                className="bg-purple-700 text-white px-4 py-2 rounded hover:bg-purple-800"
+              >
+                Add to Cart
+              </button>
+              <button
+                onClick={() => setSelectedProduct(null)}
+                className="text-gray-600 px-4 py-2 hover:underline"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Cart Modal */}
+      {showCart && (
+        <div className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50">
+          <div className="bg-white text-black p-6 rounded-lg w-96 max-h-[80vh] overflow-y-auto shadow-lg">
+            <h3 className="text-2xl font-bold mb-4">Your Cart</h3>
+            {cart.length === 0 ? (
+              <p>Your cart is empty.</p>
+            ) : (
+              <>
+                {cart.map(item => (
+                  <div key={item.id} className="flex justify-between items-center mb-4">
+                    <div>
+                      <p className="font-bold">{item.name}</p>
+                      <p>${item.price} × {item.quantity}</p>
+                    </div>
+                    <button
+                      onClick={() => removeFromCart(item.id)}
+                      className="text-red-600 hover:underline"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+                <hr className="my-4" />
+                <p className="text-lg font-semibold">Total: ${getTotal()}</p>
+                <button
+                  onClick={handleBuy}
+                  className="mt-4 w-full bg-purple-800 text-white py-2 rounded hover:bg-purple-900"
+                >
+                  Buy
+                </button>
+              </>
+            )}
+            <button
+              onClick={() => setShowCart(false)}
+              className="mt-4 text-gray-600 hover:underline"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
+
+export default App;
