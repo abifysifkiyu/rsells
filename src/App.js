@@ -6,7 +6,7 @@ function App() {
     <div className="min-h-screen bg-black text-white font-sans">
       <header className="bg-purple-800 p-6 shadow-lg">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <h1 className="text-2xl font-bold">TopResells</h1>
+          <h1 className="text-2xl font-bold">Top Resells</h1>
           <nav className="space-x-6">
             <a href="#" className="hover:text-purple-300">Home</a>
             <a href="https://discord.gg/slang" className="hover:text-purple-300">Join Discord</a>
