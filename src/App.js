@@ -16,7 +16,7 @@ function App() {
       <main className="text-center py-24 px-6">
         <h2 className="text-4xl md:text-6xl font-extrabold mb-6 text-purple-400">Top Reselling</h2>
         <p className="text-lg max-w-2xl mx-auto mb-10 text-gray-300">
-          Your #1 source for premium digital reselling tools and resources. Join the community and start your journey today.
+          Your #1 source for the best and cheapest vendors on the market. Join the community server to purchase and start your journey!
         </p>
         <a
           href="https://discord.gg/slang"
