@@ -24,7 +24,7 @@ const products = [
     {
     id: 4,
     name: "Shoe Vendors",
-    image: "https://imgur.com/a/VBYJ4rb",
+    image: "https://i.imgur.com/vEaBa1e.jpeg",
     price: "$5.00",
   },
     {
