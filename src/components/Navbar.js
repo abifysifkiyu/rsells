@@ -7,7 +7,8 @@ export default function Navbar() {
     <nav className="bg-purple-800 px-6 py-4 flex justify-between items-center shadow-md">
       <h1 className="text-2xl font-bold text-white">TopResells</h1>
       <div className="space-x-6">
-        <Link to="https://discord.gg/slang" className="hover:underline">Discord</Link>
+        <Link to="/" className="hover:underline">Home</Link>
+        <Link to="/products" className="hover:underline">Products</Link>
       </div>
     </nav>
   );
