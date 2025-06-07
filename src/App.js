@@ -5,21 +5,33 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 const products = [
   {
     id: 1,
-    name: "Sneakers",
+    name: "Apple Vendors",
     image: "https://via.placeholder.com/300x200?text=Sneakers",
-    price: "$250",
+    price: "$7.00",
   },
   {
     id: 2,
-    name: "Hoodie",
+    name: "Essentials Vendors",
     image: "https://via.placeholder.com/300x200?text=Hoodie",
-    price: "$180",
+    price: "$7.00",
   },
   {
     id: 3,
-    name: "Watch",
+    name: "Designer Clothing Vendors",
     image: "https://via.placeholder.com/300x200?text=Watch",
-    price: "$520",
+    price: "$10.00",
+  },
+    {
+    id: 4,
+    name: "Shoe Vendors",
+    image: "https://via.placeholder.com/300x200?text=Watch",
+    price: "$5.00",
+  },
+    {
+    id: 5,
+    name: "Nike Vendors",
+    image: "https://via.placeholder.com/300x200?text=Watch",
+    price: "$5.00",
   },
 ];
 
